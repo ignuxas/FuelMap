@@ -1,0 +1,97 @@
+#StationTable{
+    display: flex;
+    flex-direction: column;
+    gap: var(--pad1x);
+    margin-left: var(--pad1x);
+}
+
+#StationTable a{
+    width: fit-content;
+    align-self: center;
+}
+
+.stationRow:hover{
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 15px;
+}
+
+.stationRow{
+    position: relative;
+    color: white;
+    padding: var(--pad1x);
+    background-color: rgb(46, 46, 46);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: box-shadow .2s ease;
+}
+
+    .stationHeaders{display: flex; cursor: pointer;}
+
+    .stationRow .stationName{
+        text-align: left;
+        font-weight: 500;
+        font-size: var(--fz-xl);
+        min-width: 100px;
+    }
+    .stationRow .stationAddress{
+        text-align: right;
+        width: 100%;
+        margin-left: var(--pad1x);
+        font-size: var(--fz-xxs);
+    }
+        .stationRow .stationUpdated{
+            margin-top: 4px;
+            font-size: var(--fz-xxs);
+            color: #a1a1a1;
+        }
+
+    .stationRow .stationPrices{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        margin-top: var(--pad1x);
+    }
+
+    .stationRow .stationPrices .circle95p{
+        margin: var(--pad1x) 0;
+    }
+
+    .stationRow .iconText{
+        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+        font-size: var(--fz-icon);
+    }
+
+    .stationRow .price{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100px;
+        top: 0;
+    }
+
+    .stationEdit{
+        position: absolute;
+        padding: var(--pad1x);
+        cursor: pointer;
+        border-top-left-radius: var(--border-radius);
+        background-color: rgb(66, 66, 66);
+        right: 0;
+        bottom: 0;
+        transition: background-color .2s ease;
+    }
+
+    .stationEdit:hover{
+        background-color: rgb(31, 170, 46);
+    }
+
+.stationRow.editable{
+    box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+    border: 1px solid rgb(31, 170, 46);
+    padding: 9px;
+}
+
+.stationRow.editable .stationEdit{
+    background-color: rgb(31, 170, 46);
+    padding-bottom: 9px;
+    padding-right: 9px;
+}
