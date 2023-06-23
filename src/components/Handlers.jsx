@@ -1,9 +1,10 @@
 import { api } from "../App";
 
-import { SetFuelStationDataFunc, SetErrorCodeFunc } from "../App";
+import { SetFuelStationDataFunc, SetErrorCodeFunc, sortByS } from "../App";
 import Axios from "axios";
 
-export async function getFuelStations(order) {
+export async function getFuelStations(order=["A95", "ASC"], showLoading=true) {
+    if(showLoading) 
     document.getElementById("Loading").style.display = "block"; // could use refs instead
 
     await Axios.get(`${api}/fuelstations?sortBy=${order[0]}&sortOrder=${order[1]}`).then((response) => {
@@ -41,7 +42,6 @@ export async function handleEdit(location, type="popup"){
     loadingIcon.style.display = "block"; // show loading animation
     editIcon.style.opacity = 0; // hide edit icon
 
-    // todo: make this not hard-coded
     var changedPrices = {};
 
     changedPricesDivs.forEach((priceDiv) => {
@@ -60,6 +60,11 @@ export async function handleEdit(location, type="popup"){
         }
     }
 
+
+    console.log(changedPrices);
+    console.log(currentPrices);
+    console.log(changed);
+
     // if any prices were changed, send a post request to the server
     if(changed){
         await fetch(api+"/editfuelstation" , {
@@ -69,15 +74,12 @@ export async function handleEdit(location, type="popup"){
                 },
                 body: JSON.stringify({
                     ID: lID,
-                    A95: changedPrices.A95,
-                    A98: changedPrices.A98,
-                    D: changedPrices.D,
-                    LPG: changedPrices.LPG
+                    ...changedPrices
                 })
             })
             .then(async (data) => {
                 if(data.status === 200){
-                    await getFuelStations();
+                    await getFuelStations(sortByS, false);
                 } else {
                     console.log("Kainos nepakeistos");
                 }

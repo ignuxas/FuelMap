@@ -17,7 +17,9 @@ export const circleText= {
   "LPG": "LPG"
 }
 
-export const fuelTypes = ["A95", "A98", "D", "LPG"]
+// If I made this not hard coded, I would have to make a new request 
+// to the server to get the fuel types which I could do, but I don't want to ¯\_(ツ)_/¯
+export const fuelTypes = ["A95", "A98", "D", "LPG"] // and this is faster anyway
 
 export const api = "https://fuelapi.ignuxas.com"
 
@@ -71,7 +73,7 @@ function App() {
     return (value / trueLength)
   }
 
-  const MapController = (position) => {
+  const MapController = () => {
     const map = useMap();
     Map = map;
     return <></>;
@@ -197,7 +199,7 @@ function App() {
                 </Popup>
               </CircleMarker>
             ) : (<></>)
-          ))}
+            )).reverse() /* reverso so the under averge icons are on top when needed */}
         </MapContainer>
       </div>
     </div>

@@ -40,9 +40,9 @@ export default function StationsTable(props) {
                 </div>
             </div>
         ) : (<></>)))}
-        <a className="aeffect" onClick={
+        <button onClick={
             () => props.setDisplayedTableStations(quantity + 12)
-            }>LOAD MORE</a>
+            }>LOAD MORE</button>
         </>
     )
 }
