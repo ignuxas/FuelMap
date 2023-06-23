@@ -81,7 +81,7 @@
     }
 
     .stationEdit:hover{
-        background-color: rgb(31, 170, 46);
+        background-color: var(--color-green);
     }
 
 #StationTable button{
@@ -104,12 +104,12 @@
 
 .stationRow.editable{
     box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
-    border: 1px solid rgb(31, 170, 46);
+    border: 1px solid var(--color-green);
     padding: 9px;
 }
 
 .stationRow.editable .stationEdit{
-    background-color: rgb(31, 170, 46);
+    background-color: var(--color-green);
     padding-bottom: 9px;
     padding-right: 9px;
 }

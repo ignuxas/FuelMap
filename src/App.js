@@ -38,6 +38,7 @@ function App() {
     // there is a better way to do this, will re-write sometime
     SetErrorCodeFunc = setErrorCode;
     SetFuelStationDataFunc = SetFuelStationData;
+    sortByS = sortBy;
 
     getFuelStations(sortBy);
   }, []);
@@ -110,8 +111,7 @@ function App() {
     if(menuOpen === false){ // OPEN menu
       menu.style.left = "0px";
       menuOpen = true;
-    }
-    else{
+    } else {
       menu.style.left = "-320px";
       menuOpen = false;
     }
@@ -153,6 +153,7 @@ function App() {
                     setPos={setPos} 
                     setSortBy={setSortBy}
                     sortBy={sortBy}
+                    totalStations={FuelStationData.length}
                 ></SideCirles>
             </div>
         </div>
@@ -183,9 +184,10 @@ function App() {
                 center={[location.latitude, location.longitude]}
                 radius={9}
                 pathOptions={{
-                  color: location.fuelData[sortBy[0]] < averagePrices[sortBy[0]] ? "#00AC2B" : "#ac0000",
-                  fillOpacity: 1,
-                  fillColor: location.fuelData[sortBy[0]] < averagePrices[sortBy[0]] ? "#57FF71" : "#ff5757",
+                  color: (location.fuelData[sortBy[0]] < averagePrices[sortBy[0]]) && location.fuelData[sortBy[0]] ? "#00AC2B" : "#ac0000",
+                  fillColor: (location.fuelData[sortBy[0]] < averagePrices[sortBy[0]]) && location.fuelData[sortBy[0]] ? "#57FF71" : "#ff5757",
+                  fillOpacity: location.fuelData[sortBy[0]] ? 1 : 0.15,
+                  opacity: location.fuelData[sortBy[0]] ? 1 : 0.15,
                   bubblingMouseEvents: false,
                   weight: 2.5,
                 }}

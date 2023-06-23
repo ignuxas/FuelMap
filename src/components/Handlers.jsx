@@ -60,11 +60,6 @@ export async function handleEdit(location, type="popup"){
         }
     }
 
-
-    console.log(changedPrices);
-    console.log(currentPrices);
-    console.log(changed);
-
     // if any prices were changed, send a post request to the server
     if(changed){
         await fetch(api+"/editfuelstation" , {
