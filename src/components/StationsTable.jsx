@@ -1,20 +1,24 @@
 import FuelTypeCircles from "./FuelTypeCircles";
 import { useState } from "react";
 import { handleEdit } from "./Handlers";
-import { sortByS } from "../App";
 
 export default function StationsTable(props) {
     const [editableField, setEditableField] = useState(-1);
     const FuelStationData = props.FuelStationData;
     const averagePrices = props.averagePrices;
-    const quantity = props.quantity;
+    var quantity = props.quantity;
+    const sortBy = props.sortBy;
 
-    console.log(sortByS)
-
+    function addQuantity() {
+        quantity += 1;
+        return <></>
+    }
+    
     return (
         <>
         {FuelStationData.map((location, index) => (
-            Object.values(location.fuelData).some((price) => (price > 0 && price != null)) && location.fuelData[sortByS[0]] !== 0 ? ( // check if any price is not null
+            Object.values(location.fuelData).some((price) => (price > 0 && price != null)) && location.fuelData[sortBy[0]] !== 0 ? ( // check if any price is not null
+            
             <div className={`stationRow ${editableField === location.ID ? "editable":""}`} key={location.ID} 
                 style={index > quantity ? {display:"none"}:{display:"block"}}
             >
@@ -42,7 +46,7 @@ export default function StationsTable(props) {
                     <i className="fa-solid fa-pen-to-square" id={`EditIcon${location.ID}`}></i>
                 </div>
             </div>
-        ) : (<></>)))}
+        ) : (addQuantity())))}
         <button onClick={
             () => props.setDisplayedTableStations(quantity + 6)
             }>LOAD MORE</button>

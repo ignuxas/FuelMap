@@ -8,7 +8,7 @@ import LocationPopup from "./components/LocationPopup";
 import SideCirles from "./components/SideCircles";
 import StationsTable from "./components/StationsTable";
 
-import { getFuelStations } from "./components/Handlers";
+import { getFuelStations, toggleMenu } from "./components/Handlers";
 
 export const circleText= {
   "A95": "95",
@@ -27,13 +27,13 @@ export var SetFuelStationDataFunc, SetErrorCodeFunc, sortByS;
 
 function App() {
   var Map;
-  var menuOpen = false;
 
   const [FuelStationData, SetFuelStationData] = useState([]);
   const [sortBy, setSortBy] = useState(["A95", "ASC"]);
-  const [DisplayedTableStations, setDisplayedTableStations] = useState(12);
+  const [DisplayedTableStations, setDisplayedTableStations] = useState(6);
   const [ErrorCode, setErrorCode] = useState(200);
 
+  // ---- ON STARTUP ----
   useEffect(() => {
     // there is a better way to do this, will re-write sometime
     SetErrorCodeFunc = setErrorCode;
@@ -43,8 +43,10 @@ function App() {
     getFuelStations(sortBy);
   }, []);
 
+  // ---- ON SORT CHANGE ----
   useEffect(() => { getFuelStations(sortBy) }, [sortBy]);
 
+  // ---- GET MIN PRICE STATION ----
   function getMinStation(array, average) {
     var minNum = 99;
     var stationNum = 0;
@@ -61,6 +63,7 @@ function App() {
     return FuelStationData[stationNum];
   }
 
+  // ---- AVERAGE PRICES CALCULATOR ----
   function averagePrice(array){
     var trueLength = 0;
     var value = 0
@@ -74,16 +77,19 @@ function App() {
     return (value / trueLength)
   }
 
+  // ---- MAP CONTROLLER ----
   const MapController = () => {
     const map = useMap();
     Map = map;
     return <></>;
   };
 
+  // ---- SET POSITION ----
   function setPos(position, zoom=Map.getZoom(), offset=[30000,0]) {
     Map.flyTo(position, zoom);
   }
 
+  // ---- AVERAGE PRICES / MIN PRICES ----
   if (FuelStationData.length !== 0) {
     // ---- AVERAGE PRICES ----
     var averagePrices = {};
@@ -106,18 +112,7 @@ function App() {
     }
   }
 
-  function openMenu(){
-    var menu = document.querySelector("#Menu");
-    if(menuOpen === false){ // OPEN menu
-      menu.style.left = "0px";
-      menuOpen = true;
-    } else {
-      menu.style.left = "-320px";
-      menuOpen = false;
-    }
-  }
-
-
+  // ---- RENDER ----
   return (
     <div className="App">
       <div className="lds-dual-ring" id="Loading"/>
@@ -136,6 +131,7 @@ function App() {
                 quantity={DisplayedTableStations}
                 setDisplayedTableStations={setDisplayedTableStations}
                 setPos={setPos}
+                sortBy={sortBy}
               ></StationsTable>
             </div>
             <footer>
@@ -145,7 +141,7 @@ function App() {
             </footer>
         </div>
         <div id="PricePanel">
-            <i className="fas fa-bars" onClick={() => openMenu()} />
+            <i className="fas fa-bars" onClick={() => toggleMenu()} />
             <div className="avgFuelPrices">
                 <SideCirles 
                     avgPrices={averagePrices} 

@@ -17,7 +17,7 @@ export default function FuelTypeCircles(props) {
                     <h4 className="iconText">{circleText[fuelType]}</h4>
                     <div contentEditable={editableField === stationID ? "true":"false"  /* todo: fix warnings */}
                             className={`price ${averagePrices[fuelType] > price ? ("priceGreen") : ("priceRed")}`}>
-                            <span contentEditable="false">€</span>&nbsp;{price}
+                            € {price}
                         </div>
                 </div>
             ) : (<></>)
