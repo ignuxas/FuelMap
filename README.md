@@ -2,6 +2,13 @@
 
 A fuel station map website that displays a comprehensive list of fuel stations and their prices in the Baltic countries. By using this tool, you can easily find the nearest fuel station and check the prices for different types of fuel. The website also indicates whether the prices at each station are above or below the average for the region. Currently, this project is still in development, so be sure to check back for updates and new features.
 
+TODO: 
+- Click to compare
+- One-brand option
+- color options with saving
+- favourite stations with saving
+- optimizations
+
 ## Available Scripts
 
 In the project directory, you can run:
