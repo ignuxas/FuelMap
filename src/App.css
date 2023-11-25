@@ -138,17 +138,19 @@
     }
 
     #PricePanel{
-        position: relative;
+        position: sticky;
         display: flex;
         flex-direction: column;
         width: 60px;
         right: 0;
+        top: 0;
         color: whitesmoke; 
         text-align: center;
         padding: var(--pad1x);
         font-size: var(--fz-xxs);
         font-weight: 300 !important;
     }
+
         
         .circleDisplay{
             padding-top: 10px;

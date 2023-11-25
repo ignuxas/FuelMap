@@ -17,8 +17,7 @@ export default function StationsTable(props) {
     return (
         <>
         {FuelStationData.map((location, index) => (
-            Object.values(location.fuelData).some((price) => (price > 0 && price != null)) && location.fuelData[sortBy[0]] !== 0 ? ( // check if any price is not null
-            
+            Object.values(location.fuelData).some((price) => (price > 0 && price != null)) && location.fuelData[sortBy[0]] !== null ? ( // check if any price is not null
             <div className={`stationRow ${editableField === location.ID ? "editable":""}`} key={location.ID} 
                 style={index > quantity ? {display:"none"}:{display:"block"}}
             >

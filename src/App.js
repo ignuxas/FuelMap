@@ -86,6 +86,7 @@ function App() {
 
   // ---- SET POSITION ----
   function setPos(position, zoom=Map.getZoom(), offset=[30000,0]) {
+    toggleMenu();
     Map.flyTo(position, zoom);
   }
 
